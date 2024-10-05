@@ -11,7 +11,7 @@ import { Line } from 'react-chartjs-2'
 //   Tooltip,
 //   Legend
 // } from "chart.js";
-import OlimpycData from '../constants/Summer-Olympic-medals-1976-to-2008.json'
+import OlympicData from '../constants/Summer-Olympic-medals-1976-to-2008.json'
 
 defaults.maintainAspectRatio = true
 defaults.responsive = true
@@ -23,7 +23,7 @@ defaults.plugins.title.color = 'black'
 
 function LineGraph() {
 	const groupedData = {}
-	OlimpycData.forEach((athlete) => {
+	OlympicData.forEach((athlete) => {
 		const year = athlete.Year
 		const gender = athlete.Gender.toLowerCase()
 		if (!groupedData[year]) {
@@ -38,7 +38,7 @@ function LineGraph() {
 	const womenData = years.map((year) => groupedData[year].women)
 
 	const chartData = {
-		labels: OlimpycData.map((data) => data.Year),
+		labels: OlympicData.map((data) => data.Year),
 		datasets: [
 			{
 				label: 'Hombres',
