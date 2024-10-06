@@ -1,17 +1,8 @@
 import React from 'react'
 import { Chart as ChartJS, defaults } from 'chart.js/auto'
 import { Line } from 'react-chartjs-2'
-// import {
-//   Chart as ChartJS,
-//   CategoryScale,
-//   LinearScale,
-//   PointElement,
-//   LineElement,
-//   Title,
-//   Tooltip,
-//   Legend
-// } from "chart.js";
-import OlympicData from '../constants/Summer-Olympic-medals-1976-to-2008.json'
+
+import OlympicData from "@dataAnalysis/constants/Summer-Olympic-medals-1976-to-2008.json"
 
 defaults.maintainAspectRatio = true
 defaults.responsive = true
@@ -31,14 +22,14 @@ function LineGraph() {
 		}
 
 		groupedData[year][gender]++
-	})
+	});
 	// Crear los conjuntos de datos para Chart.js
-	const years = Object.keys(groupedData)
-	const menData = years.map((year) => groupedData[year].men)
-	const womenData = years.map((year) => groupedData[year].women)
+	const years = Object.keys(groupedData);
+	const menData = years.map((year) => groupedData[year].men);
+	const womenData = years.map((year) => groupedData[year].women);
 
 	const chartData = {
-		labels: OlympicData.map((data) => data.Year),
+		labels: years,
 		datasets: [
 			{
 				label: 'Hombres',
@@ -63,8 +54,6 @@ function LineGraph() {
 
 	return (
 		<div>
-			<h1>Multi Líneas</h1>
-			<h2>{''}</h2>
 			<Line
 				data={chartData}
 				option={{
