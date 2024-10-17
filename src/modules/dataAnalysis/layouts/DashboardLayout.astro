@@ -1,0 +1,43 @@
+---
+import Container from './components/Container'
+import Sidebar from './components/Sidebar'
+
+interface Props {
+	title: string
+}
+
+const { title } = Astro.props
+---
+
+<!doctype html>
+<html lang='en'>
+	<head>
+		<meta charset='UTF-8' />
+		<meta
+			name='description'
+			content='Astro description'
+		/>
+		<meta
+			name='viewport'
+			content='width=device-width'
+		/>
+		<link
+			rel='icon'
+			type='image/svg+xml'
+			href='/favicon.svg'
+		/>
+		<meta
+			name='generator'
+			content={Astro.generator}
+		/>
+		<title>{title}</title>
+	</head>
+	<body>
+		<div class='flex h-screen bg-gray-100'>
+			<Sidebar />
+			<Container titulo='Tendencias Olímpicas'>
+				<slot />
+			</Container>
+		</div>
+	</body>
+</html>
