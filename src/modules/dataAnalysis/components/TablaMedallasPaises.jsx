@@ -1,7 +1,7 @@
 import React from 'react'
 import OlympicData from '@dataAnalysis/constants/Summer-Olympic-medals-1976-to-2008.json'
 
-export default function MedalsForCountries() {
+export default function TablaMedallasPaises() {
 	const medalsByCountry = OlympicData.reduce((acc, data) => {
 		const country = data.Country
 		acc[country] = acc[country] || {

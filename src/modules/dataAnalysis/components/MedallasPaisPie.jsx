@@ -46,5 +46,10 @@ export default function PieMedallas({ eventName }) {
 		],
 	}
 
-	return <Pie data={chartData} />
+	return (
+		<Pie
+			data={chartData}
+			options={{ plugins: { legend: { display: false } } }}
+		/>
+	)
 }

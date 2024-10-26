@@ -4,14 +4,6 @@ import { Line } from 'react-chartjs-2'
 
 import OlympicData from '@dataAnalysis/constants/Summer-Olympic-medals-1976-to-2008.json'
 
-defaults.maintainAspectRatio = true
-defaults.responsive = true
-
-defaults.plugins.title.display = true
-defaults.plugins.title.align = 'start'
-defaults.plugins.title.font.size = 20
-defaults.plugins.title.color = 'black'
-
 export default function MedallasPorPais({ countryName }) {
 	const groupedData = {}
 	OlympicData.forEach((data) => {
