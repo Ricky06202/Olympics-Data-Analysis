@@ -9,6 +9,6 @@ import DashboardLayout from '@dataAnalysis/layouts/DashboardLayout.astro'
 	page={DashboardPages.Dashboard}
 	title='Dashboard'
 >
-	<ChartsList />
+	<ChartsList client:load />
 	<TablaResumenes />
 </DashboardLayout>
