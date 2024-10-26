@@ -1,10 +1,16 @@
 ---
 import LayoutP from "@dataAnalysis/layouts/layoutPrueba.astro";
 import Pie from "@dataAnalysis/components/Pie";
+import MedalCountriesTime from "@dataAnalysis/components/MedalComp";
+import MedalsForCountries from "@dataAnalysis/components/MedalsCountries.jsx";
 ---
 
 <LayoutP title="Pruebas de gráficos">
   <main>
-    <Pie eventName={"football"} client:load />
+    <!-- <Pie eventName={"football"} client:load /> -->
+    <MedalCountriesTime countryName={"Canada"} client:load />
+    <!-- Tabla de medallas por países -->
+    <br />
+    <MedalsForCountries client:load />
   </main>
 </LayoutP>

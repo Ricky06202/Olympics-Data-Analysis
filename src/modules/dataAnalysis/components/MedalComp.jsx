@@ -12,48 +12,71 @@ defaults.plugins.title.align = "start";
 defaults.plugins.title.font.size = 20;
 defaults.plugins.title.color = "black";
 
-function LineGraph() {
-  const groupedData = {};
-  OlympicData.forEach((athlete) => {
-    const year = athlete.Year;
-    const gender = athlete.Gender.toLowerCase();
-    if (!groupedData[year]) {
-      groupedData[year] = { men: 0, women: 0 };
-    }
+export default function MedalCountriesTime({ countryName }) {
+  //   const medalsByYear = medalsData.reduce((acc, medal) => {
+  //     const year = medal.Year;
+  //     if (!acc[year]) {
+  //       acc[year] = {
+  //         gold: 0,
+  //         silver: 0,
+  //         bronze: 0,
+  //       };
+  //     }
+  //     acc[year][medal.Medal.toLowerCase()]++;
+  //     return acc;
+  //   }, {});
 
-    groupedData[year][gender]++;
+  const groupedData = {};
+  OlympicData.forEach((data) => {
+    const year = data.Year;
+    const countryMedal = data.Medal.toLowerCase();
+    if (!groupedData[year]) {
+      groupedData[year] = { gold: 0, silver: 0, bronze: 0 };
+    }
+    if (data.Country === countryName) {
+      groupedData[year][countryMedal]++;
+    }
   });
-  // Crear los conjuntos de datos para Chart.js
   const years = Object.keys(groupedData);
-  const menData = years.map((year) => groupedData[year].men);
-  const womenData = years.map((year) => groupedData[year].women);
+  const countryDataGold = years.map((year) => groupedData[year].gold);
+  const countryDataSilver = years.map((year) => groupedData[year].silver);
+  const countryDataBronze = years.map((year) => groupedData[year].bronze);
 
   const chartData = {
     labels: years,
     datasets: [
       {
-        label: "Hombres",
-        data: menData,
-        backgroundColor: "#064FF0",
-        borderColor: "#064FF0",
+        label: "Oro",
+        data: countryDataGold,
+        backgroundColor: "Yellow",
+        borderColor: "#FFD700",
         fill: false,
         tension: 0.4,
         pointRadius: 3,
       },
       {
-        label: "Mujeres",
-        data: womenData,
-        backgroundColor: "#FF3030",
-        borderColor: "#FF3030",
+        label: "Plata",
+        data: countryDataSilver,
+        backgroundColor: "Gray",
+        borderColor: "#C0C0C0",
+        fill: false,
+        tension: 0.4,
+        pointRadius: 3,
+      },
+      {
+        label: "Bronce",
+        data: countryDataBronze,
+        backgroundColor: "#804A00",
+        borderColor: "#CD7F32",
         fill: false,
         tension: 0.4,
         pointRadius: 3,
       },
     ],
   };
-
   return (
-    <div>
+    <div className="text-center">
+      <h3> Medallas ganadas a través del tiempo por {countryName}</h3>
       <Line
         data={chartData}
         option={{
@@ -85,5 +108,3 @@ function LineGraph() {
     </div>
   );
 }
-
-export default LineGraph;

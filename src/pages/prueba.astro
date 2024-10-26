@@ -3,6 +3,8 @@ import LayoutP from "@dataAnalysis/layouts/layoutPrueba.astro";
 import MultiLine from "@dataAnalysis/components/MultiLine";
 import ShowData from "@dataAnalysis/components/ShowData";
 import Bar from "@dataAnalysis/components/Bar";
+import Pie from "@dataAnalysis/components/Pie";
+import MedalCountriesTime from "@dataAnalysis/components/MedalComp";
 ---
 
 <LayoutP title="Prueba grafico">
@@ -11,5 +13,9 @@ import Bar from "@dataAnalysis/components/Bar";
     <MultiLine client:load />
     <br />
     <Bar client:load />
+    <br />
+    <Pie eventName={"football"} client:load />
+    <br />
+    <MedalCountriesTime countryName={"Canada"} client:load />
   </main>
 </LayoutP>
