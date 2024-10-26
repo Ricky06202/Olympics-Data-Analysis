@@ -1,5 +1,6 @@
 ---
 import ChartsList from '@dataAnalysis/components/ChartsList'
+import MedalsForCountries from '@dataAnalysis/components/MedalsCountries'
 import TablaResumenes from '@dataAnalysis/components/TablaResumenes'
 import { DashboardPages } from '@dataAnalysis/constants/DashboardPages'
 import DashboardLayout from '@dataAnalysis/layouts/DashboardLayout.astro'
@@ -10,5 +11,5 @@ import DashboardLayout from '@dataAnalysis/layouts/DashboardLayout.astro'
 	title='Dashboard'
 >
 	<ChartsList client:load />
-	<TablaResumenes />
+	<MedalsForCountries client:load />
 </DashboardLayout>
