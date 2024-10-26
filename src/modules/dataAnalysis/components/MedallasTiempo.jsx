@@ -1,12 +1,20 @@
 import React from "react";
 import { Chart as ChartJS, defaults } from "chart.js/auto";
-import { Pie } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 
 import OlympicData from "@dataAnalysis/constants/Summer-Olympic-medals-1976-to-2008.json";
 
-function PieGraph({ eventName }) {
+defaults.maintainAspectRatio = true;
+defaults.responsive = true;
+
+defaults.plugins.title.display = true;
+defaults.plugins.title.align = "start";
+defaults.plugins.title.font.size = 20;
+defaults.plugins.title.color = "black";
+
+function MedallasPorOlimpiada() {
   const goldMedalByCountry = OlympicData.reduce((acc, item) => {
-    if (item.Medal === "Gold" && item.Event === eventName) {
+    if (item.Medal === "Gold") {
       acc[item.Country] = (acc[item.Country] || 0) + 1;
     }
     return acc;
@@ -30,30 +38,29 @@ function PieGraph({ eventName }) {
       {
         label: "Medallas de Oro",
         data: values,
-        backgroundColor: [
-          "red",
-          "blue",
-          "yellow",
-          "orange",
-          "green",
-          "cyan",
-          "magenta",
-          "purple",
-          "lime",
-          "lightblue",
-          "pink",
-        ],
-        borderWidth: 1,
+        backgroundColor: ["rgba(43, 63, 229, 0.8)"],
+        borderRadius: 5,
+        fill: false,
       },
     ],
   };
 
   return (
     <div>
-      <h2>Medallas ganada en football</h2>
-      <Pie data={chartData} />
+      <h2>Medallas de oro ganados por países hasta el 2008</h2>
+      <Bar
+        data={chartData}
+        options={{
+          indexAxis: "y", // <-- Esto cambia el eje de las etiquetas
+          scales: {
+            x: {
+              beginAtZero: true,
+            },
+          },
+        }}
+      />
     </div>
   );
 }
 
-export default PieGraph;
+export default MedallasPorOlimpiada;

@@ -12,7 +12,7 @@ defaults.plugins.title.align = "start";
 defaults.plugins.title.font.size = 20;
 defaults.plugins.title.color = "black";
 
-function LineGraph() {
+export default function HombreVSMujeres() {
   const groupedData = {};
   OlympicData.forEach((athlete) => {
     const year = athlete.Year;
@@ -85,5 +85,3 @@ function LineGraph() {
     </div>
   );
 }
-
-export default LineGraph;

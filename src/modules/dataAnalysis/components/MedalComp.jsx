@@ -12,20 +12,7 @@ defaults.plugins.title.align = "start";
 defaults.plugins.title.font.size = 20;
 defaults.plugins.title.color = "black";
 
-export default function MedalCountriesTime({ countryName }) {
-  //   const medalsByYear = medalsData.reduce((acc, medal) => {
-  //     const year = medal.Year;
-  //     if (!acc[year]) {
-  //       acc[year] = {
-  //         gold: 0,
-  //         silver: 0,
-  //         bronze: 0,
-  //       };
-  //     }
-  //     acc[year][medal.Medal.toLowerCase()]++;
-  //     return acc;
-  //   }, {});
-
+export default function MedallasPorPaises({ countryName }) {
   const groupedData = {};
   OlympicData.forEach((data) => {
     const year = data.Year;
