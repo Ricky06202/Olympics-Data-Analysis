@@ -12,7 +12,7 @@ defaults.plugins.title.align = "start";
 defaults.plugins.title.font.size = 20;
 defaults.plugins.title.color = "black";
 
-export default function MedallasPorPais({ countryName }) {
+export default function MedallasPorPaises({ countryName }) {
   const groupedData = {};
   OlympicData.forEach((data) => {
     const year = data.Year;

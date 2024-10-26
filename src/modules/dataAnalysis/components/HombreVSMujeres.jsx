@@ -12,58 +12,48 @@ defaults.plugins.title.align = "start";
 defaults.plugins.title.font.size = 20;
 defaults.plugins.title.color = "black";
 
-export default function MedallasPorPais({ countryName }) {
+export default function HombreVSMujeres() {
   const groupedData = {};
-  OlympicData.forEach((data) => {
-    const year = data.Year;
-    const countryMedal = data.Medal.toLowerCase();
+  OlympicData.forEach((athlete) => {
+    const year = athlete.Year;
+    const gender = athlete.Gender.toLowerCase();
     if (!groupedData[year]) {
-      groupedData[year] = { gold: 0, silver: 0, bronze: 0 };
+      groupedData[year] = { men: 0, women: 0 };
     }
-    if (data.Country === countryName) {
-      groupedData[year][countryMedal]++;
-    }
+
+    groupedData[year][gender]++;
   });
+  // Crear los conjuntos de datos para Chart.js
   const years = Object.keys(groupedData);
-  const countryDataGold = years.map((year) => groupedData[year].gold);
-  const countryDataSilver = years.map((year) => groupedData[year].silver);
-  const countryDataBronze = years.map((year) => groupedData[year].bronze);
+  const menData = years.map((year) => groupedData[year].men);
+  const womenData = years.map((year) => groupedData[year].women);
 
   const chartData = {
     labels: years,
     datasets: [
       {
-        label: "Oro",
-        data: countryDataGold,
-        backgroundColor: "Yellow",
-        borderColor: "#FFD700",
+        label: "Hombres",
+        data: menData,
+        backgroundColor: "#064FF0",
+        borderColor: "#064FF0",
         fill: false,
         tension: 0.4,
         pointRadius: 3,
       },
       {
-        label: "Plata",
-        data: countryDataSilver,
-        backgroundColor: "Gray",
-        borderColor: "#C0C0C0",
-        fill: false,
-        tension: 0.4,
-        pointRadius: 3,
-      },
-      {
-        label: "Bronce",
-        data: countryDataBronze,
-        backgroundColor: "#804A00",
-        borderColor: "#CD7F32",
+        label: "Mujeres",
+        data: womenData,
+        backgroundColor: "#FF3030",
+        borderColor: "#FF3030",
         fill: false,
         tension: 0.4,
         pointRadius: 3,
       },
     ],
   };
+
   return (
-    <div className="text-center">
-      <h3> Medallas ganadas a través del tiempo por {countryName}</h3>
+    <div>
       <Line
         data={chartData}
         option={{

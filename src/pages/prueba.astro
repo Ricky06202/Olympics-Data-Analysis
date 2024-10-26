@@ -1,15 +1,21 @@
 ---
 import LayoutP from "@dataAnalysis/layouts/layoutPrueba.astro";
-import MultiLine from "@dataAnalysis/components/MultiLine";
-import ShowData from "@dataAnalysis/components/ShowData";
-import Bar from "@dataAnalysis/components/Bar";
+import HombreVSMujeres from "@dataAnalysis/components/HombreVSMujeres";
+import CantidadDatos from "@dataAnalysis/components/CantidadDatos";
+import MedallasPorOlimpiada from "@dataAnalysis/components/MedallasTiempo";
+import PieMedallas from "@dataAnalysis/components/MedallasPaisPie";
+import MedallasPorPaises from "@dataAnalysis/components/MedalComp";
 ---
 
 <LayoutP title="Prueba grafico">
   <main>
-    <ShowData />
-    <MultiLine client:load />
+    <CantidadDatos />
+    <HombreVSMujeres client:load />
     <br />
-    <Bar client:load />
+    <MedallasPorOlimpiada client:load />
+    <br />
+    <PieMedallas eventName={"football"} client:load />
+    <br />
+    <MedallasPorPaises countryName={"Canada"} client:load />
   </main>
 </LayoutP>

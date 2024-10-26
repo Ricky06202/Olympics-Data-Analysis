@@ -3,7 +3,7 @@ import React from "react";
 // import { Line } from 'react-chartjs-2'
 import OlympicData from "@dataAnalysis/constants/Summer-Olympic-medals-1976-to-2008.json";
 
-function showData() {
+export default function CantidadDatos() {
   var keyCount = Object.keys(OlympicData).length;
 
   return (
@@ -12,5 +12,3 @@ function showData() {
     </div>
   );
 }
-
-export default showData;

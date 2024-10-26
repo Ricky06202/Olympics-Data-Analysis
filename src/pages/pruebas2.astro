@@ -1,7 +1,7 @@
 ---
 import LayoutP from "@dataAnalysis/layouts/layoutPrueba.astro";
 import Pie from "@dataAnalysis/components/Pie";
-import MedallasPorPaises from "@dataAnalysis/components/MedallasPorPais";
+import MedallasPorPais from "@dataAnalysis/components/MedallasPorPais";
 import MedallasTabla from "@dataAnalysis/components/MedallasTabla";
 ---
 
@@ -9,7 +9,7 @@ import MedallasTabla from "@dataAnalysis/components/MedallasTabla";
   <main>
     <Pie eventName={"football"} client:load />
     <br />
-    <MedallasPorPaises countryName="Canada" client:load />
+    <MedallasPorPais countryName="Canada" client:load />
     <MedallasTabla client:load />
   </main></LayoutP
 >
