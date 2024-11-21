@@ -11,7 +11,6 @@ export async function postLogin(user: string, passwd: string){
         username: user,
         password: passwd
     }).then((response)=>{
-       console.log(response)
        return response.data
     }).then((response)=>(
         {
@@ -29,7 +28,6 @@ export async function postRegister(user: string, passwd: string, mail: string){
         password: passwd,
         email: mail
     }).then((response)=>{
-       console.log(response)
        return response.data
     })
 }

@@ -10,11 +10,3 @@ export interface OlympicsData{
     event_gender: string
     medal: string
 }
-
-// export interface profile{
-//     username: string
-//     password: string
-//     email: string
-//     token: string
-// }
-
