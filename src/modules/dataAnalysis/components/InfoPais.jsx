@@ -9,6 +9,7 @@ import { ChevronDown } from 'components/icons/ChevronDown'
 
 export default function InfoPais() {
 	const [countrySelect, setCountrySelect] = useState('')
+	const [searchTerm, setSearchTerm] = useState('')
 	const countries = OlympicData.reduce((acc, data) => {
 		const country = data.Country
 		acc[country] = acc[country] || {
@@ -19,26 +20,24 @@ export default function InfoPais() {
 
 	const countriesNames = Object.values(countries).map((country) => country.countryName)
 
-	countriesNames.sort(function (a, b) {
-		const nameA = a.toLowerCase()
-		const nameB = b.toLowerCase()
-		if (nameA < nameB) return -1
-		if (nameA > nameB) return 1
-		return 0
-	})
+	countriesNames.sort((a, b) => a.localeCompare(b))
 
-	function selectionCountry(event) {
-		setCountrySelect(event.target.value)
+	const filteredCountries = countriesNames.filter((country) => country.toLowerCase().includes(searchTerm.toLowerCase()))
+
+	function selectionCountry(country) {
+		setCountrySelect(country)
+		setSearchTerm(country)
+		setIsOpen(false)
 	}
 
 	const [isOpen, setIsOpen] = useState(false)
 	const dropdownRef = useRef(null)
 
-	const toggleDropdown = () => setIsOpen(!isOpen)
-
-	const handleSelectCountry = (country) => {
-		selectionCountry({ target: { value: country } })
-		setIsOpen(false)
+	const toggleDropdown = () => {
+		setIsOpen(!isOpen)
+		if (!isOpen) {
+			setSearchTerm('')
+		}
 	}
 
 	useEffect(() => {
@@ -55,42 +54,57 @@ export default function InfoPais() {
 	}, [])
 
 	return (
-		<DashBoardSection titulo='Información del Pais'>
+		<DashBoardSection titulo='Información del País'>
 			<div
 				className='relative w-full max-w-xs mx-auto font-sans'
 				ref={dropdownRef}
 			>
-				<button
-					onClick={toggleDropdown}
-					className='flex items-center justify-between w-full px-4 py-2 text-lg text-left text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
-					aria-haspopup='listbox'
-					aria-expanded={isOpen}
-				>
-					<span>{countrySelect || 'Selecciona un país'}</span>
-					<ChevronDown
-						className={`w-5 h-5 text-gray-400 transition-transform duration-200 ${
-							isOpen ? 'transform rotate-180' : ''
-						}`}
+				<div className='relative'>
+					<input
+						type='text'
+						value={searchTerm}
+						onChange={(e) => {
+							setSearchTerm(e.target.value)
+							setIsOpen(true)
+						}}
+						onClick={toggleDropdown}
+						className='w-full px-4 py-2 text-lg text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+						placeholder='Buscar país...'
 					/>
-				</button>
+					<button
+						onClick={toggleDropdown}
+						className='absolute inset-y-0 right-0 flex items-center px-2'
+						aria-label='Toggle dropdown'
+					>
+						<ChevronDown
+							className={`w-5 h-5 text-gray-400 transition-transform duration-200 ${
+								isOpen ? 'transform rotate-180' : ''
+							}`}
+						/>
+					</button>
+				</div>
 				{isOpen && (
 					<ul
 						className='absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-auto'
 						role='listbox'
 					>
-						{countriesNames.map((country, index) => (
-							<li
-								key={index}
-								className={`px-4 py-2 cursor-pointer hover:bg-blue-50 ${
-									country === countrySelect ? 'bg-blue-100' : ''
-								}`}
-								onClick={() => handleSelectCountry(country)}
-								role='option'
-								aria-selected={country === countrySelect}
-							>
-								{country}
-							</li>
-						))}
+						{filteredCountries.length === 0 ? (
+							<li className='px-4 py-2 text-gray-500'>No se encontraron países</li>
+						) : (
+							filteredCountries.map((country, index) => (
+								<li
+									key={index}
+									className={`px-4 py-2 cursor-pointer hover:bg-blue-50 ${
+										country === countrySelect ? 'bg-blue-100' : ''
+									}`}
+									onClick={() => selectionCountry(country)}
+									role='option'
+									aria-selected={country === countrySelect}
+								>
+									{country}
+								</li>
+							))
+						)}
 					</ul>
 				)}
 			</div>

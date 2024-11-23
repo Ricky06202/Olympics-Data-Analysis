@@ -6,7 +6,7 @@ import OlympicData from '@dataAnalysis/constants/Summer-Olympic-medals-1976-to-2
 
 export default function PieMedallas({ eventName }) {
 	const goldMedalByCountry = OlympicData.reduce((acc, item) => {
-		if (item.Medal === 'Gold' && item.Event === eventName) {
+		if (item.Medal === 'Gold' && item.Event.toLowerCase() === eventName.toLowerCase()) {
 			acc[item.Country] = (acc[item.Country] || 0) + 1
 		}
 		return acc

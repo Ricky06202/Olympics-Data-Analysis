@@ -5,8 +5,11 @@ import HombreVSMujeres from './HombreVSMujeres'
 import PieMedallas from './MedallasPaisPie'
 import MedallasPorOlimpiada from './MedallasTiempo'
 import DashBoardSection from './DashBoardSection'
+import SelectorDeportes from './options/selectorDeportes'
+import { useState } from 'react'
 
 export default function ChartsList() {
+	const [sportName, setSportName] = useState('Volleyball')
 	return (
 		<DashBoardSection titulo='Tendencias Olímpicas'>
 			<div className='grid grid-cols-1 gap-6 mt-6 sm:grid-cols-2 lg:grid-cols-3'>
@@ -27,8 +30,16 @@ export default function ChartsList() {
 				<DashboardCard
 					titulo='Destacados por Deporte'
 					icon={<Users className='w-6 h-6 text-gray-600' />}
+					filter={
+						<SelectorDeportes
+							value={sportName}
+							onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+								setSportName(e.target.value)
+							}}
+						/>
+					}
 				>
-					<PieMedallas eventName='football' />
+					<PieMedallas eventName={sportName} />
 				</DashboardCard>
 			</div>
 		</DashBoardSection>
