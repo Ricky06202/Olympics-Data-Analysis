@@ -36,13 +36,13 @@ export default function TablaMedallasPaises() {
 
 	return (
 		<div className='mt-8 bg-white rounded-lg shadow'>
-			<InputPaises
-				value={countryFilter}
-				onChange={(e) => setCountryFilter(e.target.value.toLowerCase())}
-			/>
 			<div>
-				<div className='p-4'>
+				<div className='pl-4 flex items-center'>
 					<h3 className='text-lg font-semibold text-gray-700'>Resumen de Medallas</h3>
+					<InputPaises
+						value={countryFilter}
+						onChange={(e) => setCountryFilter(e.target.value)}
+					/>
 				</div>
 				<div className='overflow-x-auto'>
 					<table className='w-full table-auto'>
