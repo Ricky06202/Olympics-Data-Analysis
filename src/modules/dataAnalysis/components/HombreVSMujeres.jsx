@@ -6,7 +6,7 @@ export default function HombreVSMujeres() {
   const olympicsData = useOlympicsData();
 
   const groupedData = {};
-  olympicsData.forEach((athlete) => {
+  OlympicData.forEach((athlete) => {
     const year = athlete.Year;
     if (!year) return;
     const gender = athlete.Gender.toLowerCase();
