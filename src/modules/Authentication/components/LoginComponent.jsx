@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import { UserImage } from '@dataAnalysis/Authentication/components/icons/UserImage'
-import { PasswordImage } from '@dataAnalysis/Authentication/components/icons/PasswordImage'
-import InputComponent from '@dataAnalysis/Authentication/components/InputComponent'
-import ButtonComponent from '@dataAnalysis/Authentication/components/ButtonComponent'
+import { UserImage } from 'modules/Authentication/components/icons/UserImage'
+import { PasswordImage } from 'modules/Authentication/components/icons/PasswordImage'
+import InputComponent from 'modules/Authentication/components/InputComponent'
+import ButtonComponent from 'modules/Authentication/components/ButtonComponent'
 import { postLogin } from '@dataAnalysis/services/authAPI'
 import { useUserStore } from '../store/authStore'
 

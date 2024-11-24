@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import InputComponent from '@dataAnalysis/Authentication/components/InputComponent'
-import ButtonComponent from '@dataAnalysis/Authentication/components/ButtonComponent'
+import InputComponent from 'modules/Authentication/components/InputComponent'
+import ButtonComponent from 'modules/Authentication/components/ButtonComponent'
 import { postRegister } from '@dataAnalysis/services/authAPI'
 
 export default function RegisterForm() {
