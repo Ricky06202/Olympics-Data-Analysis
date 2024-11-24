@@ -1,55 +1,64 @@
-import { Bar } from 'react-chartjs-2'
-
-import OlympicData from '@dataAnalysis/constants/Summer-Olympic-medals-1976-to-2008.json'
+import { useOlympicsData } from "modules/hooks/useOlympicsData";
+import { Bar } from "react-chartjs-2";
 
 function MedallasPorOlimpiada({ limite }) {
-	const goldMedalByCountry = OlympicData.reduce((acc, item) => {
-		if (item.Medal === 'Gold') {
-			acc[item.Country] = (acc[item.Country] || 0) + 1
-		}
-		return acc
-	}, {})
+  const olympicsData = useOlympicsData();
 
-	let dataArray = Object.entries(goldMedalByCountry).map(([country, medals]) => ({
-		country,
-		medals,
-	}))
+  if (!olympicsData) {
+    return (
+      <p className="flex justify-center items-center p-40 text-xl">Cargando</p>
+    );
+  }
 
-	dataArray.sort((a, b) => b.medals - a.medals)
+  const goldMedalByCountry = olympicsData.reduce((acc, item) => {
+    if (item.Medal === "Gold") {
+      acc[item.Country] = (acc[item.Country] || 0) + 1;
+    }
+    return acc;
+  }, {});
 
-	if (limite) {
-		dataArray = dataArray.slice(0, limite)
-	}
+  let dataArray = Object.entries(goldMedalByCountry).map(
+    ([country, medals]) => ({
+      country,
+      medals,
+    })
+  );
 
-	const labels = dataArray.map((item) => item.country)
-	const values = dataArray.map((item) => item.medals)
+  dataArray.sort((a, b) => b.medals - a.medals);
 
-	const chartData = {
-		labels,
-		datasets: [
-			{
-				label: 'Medallas de Oro',
-				data: values,
-				backgroundColor: ['rgba(43, 63, 229, 0.8)'],
-				borderRadius: 5,
-				fill: false,
-			},
-		],
-	}
+  if (limite) {
+    dataArray = dataArray.slice(0, limite);
+  }
 
-	return (
-		<Bar
-			data={chartData}
-			options={{
-				indexAxis: 'y', // <-- Esto cambia el eje de las etiquetas
-				scales: {
-					x: {
-						beginAtZero: true,
-					},
-				},
-			}}
-		/>
-	)
+  const labels = dataArray.map((item) => item.country);
+  const values = dataArray.map((item) => item.medals);
+
+  const chartData = {
+    labels,
+    datasets: [
+      {
+        label: "Medallas de Oro",
+        data: values,
+        backgroundColor: ["rgba(43, 63, 229, 0.8)"],
+        borderRadius: 5,
+        fill: false,
+      },
+    ],
+  };
+
+  return (
+    <Bar
+      data={chartData}
+      options={{
+        indexAxis: "y", // <-- Esto cambia el eje de las etiquetas
+        scales: {
+          x: {
+            beginAtZero: true,
+          },
+        },
+      }}
+    />
+  );
 }
 
-export default MedallasPorOlimpiada
+export default MedallasPorOlimpiada;
