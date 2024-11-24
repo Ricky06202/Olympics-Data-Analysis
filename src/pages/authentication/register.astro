@@ -1,7 +1,8 @@
 ---
-import RegisterLayout from "@dataAnalysis/Authentication/layout/RegisterLayout.astro";
+import RegisterComponent from '@dataAnalysis/Authentication/components/RegisterComponent'
+import RegisterLayout from '@dataAnalysis/Authentication/layout/RegisterLayout.astro'
 ---
 
-<div>
-  <RegisterLayout />
-</div>
+<RegisterLayout>
+	<RegisterComponent client:load />
+</RegisterLayout>
