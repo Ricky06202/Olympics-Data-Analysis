@@ -5,6 +5,12 @@ import { Line } from "react-chartjs-2";
 export default function HombreVSMujeres() {
   const olympicsData = useOlympicsData();
 
+  if (!olympicsData) {
+    return (
+      <p className="flex justify-center items-center p-40 text-xl">Cargando</p>
+    );
+  }
+
   const groupedData = {};
   OlympicData.forEach((athlete) => {
     const year = athlete.Year;

@@ -2,11 +2,19 @@ import React from "react";
 import { Chart as ChartJS, defaults } from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 
-import OlympicData from "@dataAnalysis/constants/Summer-Olympic-medals-1976-to-2008.json";
+import { useOlympicsData } from "modules/hooks/useOlympicsData";
 
 export default function MedallasPorPais({ countryName }) {
+  const olympicsData = useOlympicsData();
+
+  if (!olympicsData) {
+    return (
+      <p className="flex justify-center items-center p-40 text-xl">Cargando</p>
+    );
+  }
+
   const groupedData = {};
-  OlympicData.forEach((data) => {
+  olympicsData.forEach((data) => {
     const year = data.Year;
     if (!year || data.Country !== countryName) return;
     const countryMedal = data.Medal.toLowerCase();
