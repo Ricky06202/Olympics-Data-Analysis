@@ -1,5 +1,8 @@
 ---
-import AuthLayout from "@dataAnalysis/Authentication/layout/AuthLayout.astro";
+import LoginComponent from '@dataAnalysis/Authentication/components/LoginComponent'
+import LoginLayout from '@dataAnalysis/Authentication/layout/LoginLayout.astro'
 ---
 
-<AuthLayout />
+<LoginLayout>
+	<LoginComponent client:load />
+</LoginLayout>
