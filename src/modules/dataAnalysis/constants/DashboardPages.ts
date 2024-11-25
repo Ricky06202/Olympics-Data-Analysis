@@ -19,4 +19,8 @@ export const DashboardPages = {
 		title: 'Paises',
 		url: '/paises',
 	},
+	Atletas: {
+		title: 'Atletas',
+		url: '/atletas',
+	},
 }
