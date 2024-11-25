@@ -1,14 +1,11 @@
 ---
-import ListaAtletas from '@dataAnalysis/components/ListaAtletas'
-import MejoresAtletas from '@dataAnalysis/components/MejoresAtletasPorTiempo'
-import { DashboardPages } from '@dataAnalysis/constants/DashboardPages'
-import DashboardLayout from '@dataAnalysis/layouts/DashboardLayout.astro'
+import ListaAtletas from "@dataAnalysis/components/ListaAtletas";
+import MejoresAtletas from "@dataAnalysis/components/MejoresAtletasPorTiempo";
+import { DashboardPages } from "@dataAnalysis/constants/DashboardPages";
+import DashboardLayout from "@dataAnalysis/layouts/DashboardLayout.astro";
 ---
 
-<DashboardLayout
-	page={DashboardPages.Atletas}
-	title='Dashboard'
->
-	<MejoresAtletas client:load />
-	<ListaAtletas client:load />
+<DashboardLayout page={DashboardPages.Atletas} title="Dashboard">
+  <!-- <MejoresAtletas client:load /> -->
+  <ListaAtletas client:load />
 </DashboardLayout>

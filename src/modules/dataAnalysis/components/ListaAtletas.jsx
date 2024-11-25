@@ -1,12 +1,20 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import InputAtletas from "./options/inputAtletas";
 
-import OlympicData from "@dataAnalysis/constants/Summer-Olympic-medals-1976-to-2008.json";
+import { useOlympicsData } from "@dataAnalysis/hooks/useOlympicsData";
 
 export default function ListaAtletas() {
-  const [countrySelect, setCountrySelect] = useState("");
-  const [sortOrder, setSortOrder] = useState("asc");
+  const [atleteFilter, setAtleteFilter] = useState("");
 
-  const medalsByAthlete = OlympicData.reduce((acc, data) => {
+  const olympicsData = useOlympicsData();
+
+  if (!olympicsData) {
+    return (
+      <p className="flex justify-center items-center p-40 text-xl">Cargando</p>
+    );
+  }
+
+  const medalsByAthlete = olympicsData.reduce((acc, data) => {
     const athlete = data.Athlete;
     const country = data.Country;
     acc[athlete] = acc[athlete] || {
@@ -15,76 +23,34 @@ export default function ListaAtletas() {
       bronze: 0,
       total: 0,
       country: country,
+      name: athlete,
     };
     acc[athlete][data.Medal.toLowerCase()]++;
     acc[athlete].total++;
     return acc;
   }, {});
 
-  const countries = OlympicData.reduce((acc, data) => {
-    const country = data.Country;
-    acc[country] = acc[country] || {
-      countryName: country,
-    };
-    return acc;
-  }, {});
-
-  const countriesNames = Object.values(countries).map(
-    (country) => country.countryName
-  );
-
-  countriesNames.sort(function (a, b) {
-    const nameA = a.toLowerCase();
-    const nameB = b.toLowerCase();
-    if (nameA < nameB) return -1;
-    if (nameA > nameB) return 1;
-    return 0;
+  const filterAtletas = Object.values(medalsByAthlete).filter((atlete) => {
+    if (atlete.name) {
+      return (
+        atlete.name.toLowerCase().includes(atleteFilter) ||
+        atlete.country.toLowerCase().includes(atleteFilter)
+      );
+    }
+    return false;
   });
 
-  function selectionCountry(event) {
-    setCountrySelect(event.target.value);
-  }
-
-  //Para los ordenar de ascendete y viceversa pendiente
-  function sortAthletes(event) {
-    setSortOrder(event.target.value);
-  }
-
-  const filterCountries = Object.entries(medalsByAthlete).filter((athlete) => {
-    return countrySelect === "" || athlete[1].country === countrySelect;
-  });
+  const handleFilter = (event) => {
+    setAtleteFilter(event.target.value.toLowerCase());
+  };
 
   return (
     <div>
       <div className="p-4">
         <h3 className="text-lg font-semibold text-gray-700">
-          Resumen de Medallas
+          Resumen de Medallas por Atleta
         </h3>
-        <div className="flex justify-between">
-          <select
-            className=""
-            name="countriesName"
-            id="countriesName"
-            value={countrySelect}
-            onChange={selectionCountry}
-          >
-            <option value="">Todos</option>
-            {countriesNames.map((country, name) => (
-              <option key={country} value={country.name}>
-                {country}
-              </option>
-            ))}
-          </select>
-          <select
-            name="sortAthlete"
-            id="sortAthlete"
-            value={sortOrder}
-            onChange={sortAthletes}
-          >
-            <option value="asc">Ascendente</option>
-            <option value="desc">Descendente</option>
-          </select>
-        </div>
+        <InputAtletas value={atleteFilter} onChange={handleFilter} />
       </div>
       <div className="overflow-x-auto">
         <table className="w-full table-auto">
@@ -111,16 +77,20 @@ export default function ListaAtletas() {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {filterCountries.map(([athleta, medals]) => (
+            {filterAtletas.map((athleta) => (
               <tr key={athleta}>
-                <td className="px-6 py-4 whitespace-nowrap">{athleta}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{athleta.name}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  {medals.country}
+                  {athleta.country}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">{medals.gold}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{medals.silver}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{medals.bronze}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{medals.total}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{athleta.gold}</td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {athleta.silver}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {athleta.bronze}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">{athleta.total}</td>
               </tr>
             ))}
           </tbody>

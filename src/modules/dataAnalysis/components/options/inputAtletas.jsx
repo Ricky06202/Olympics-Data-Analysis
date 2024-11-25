@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export default function InputPaises({ value, onChange }) {
+export default function InputAtletas({ value, onChange }) {
   return (
     <div className="flex items-center justify-between px-4 py-3">
       <input
