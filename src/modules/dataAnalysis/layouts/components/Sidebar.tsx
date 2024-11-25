@@ -33,10 +33,13 @@ export default function Sidebar({ page }: Props) {
 
 	return (
 		<aside className='w-64 bg-white shadow-md'>
-			<div className='flex items-center p-4'>
+			<a
+				href='/home'
+				className='flex items-center p-4'
+			>
 				<Award className='h-8 w-8 text-blue-600 mr-2' />
 				<span className='text-2xl font-bold text-blue-600'>OlympiData</span>
-			</div>
+			</a>
 			<nav className='mt-6'>
 				{Object.values(DashboardPages).map((button) => (
 					<a
