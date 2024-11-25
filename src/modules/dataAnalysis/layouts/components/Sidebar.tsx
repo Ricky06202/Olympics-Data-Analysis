@@ -4,6 +4,7 @@ import { BarChart3 } from 'components/icons/BarChart3'
 import { Globe } from 'components/icons/Globe'
 import { Medal } from 'components/icons/Medal'
 import { Users } from 'components/icons/Users'
+import { Award } from 'modules/presentacion/components/icons/Award'
 
 interface Props {
 	page: Page
@@ -32,8 +33,9 @@ export default function Sidebar({ page }: Props) {
 
 	return (
 		<aside className='w-64 bg-white shadow-md'>
-			<div className='p-4'>
-				<h1 className='text-2xl font-bold text-blue-600'>Olimpiadas</h1>
+			<div className='flex items-center p-4'>
+				<Award className='h-8 w-8 text-blue-600 mr-2' />
+				<span className='text-2xl font-bold text-blue-600'>OlympiData</span>
 			</div>
 			<nav className='mt-6'>
 				{Object.values(DashboardPages).map((button) => (
