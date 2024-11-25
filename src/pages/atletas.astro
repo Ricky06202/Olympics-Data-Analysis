@@ -6,6 +6,6 @@ import DashboardLayout from "@dataAnalysis/layouts/DashboardLayout.astro";
 ---
 
 <DashboardLayout page={DashboardPages.Atletas} title="Dashboard">
-  <!-- <MejoresAtletas client:load /> -->
+  <MejoresAtletas client:load />
   <ListaAtletas client:load />
 </DashboardLayout>
