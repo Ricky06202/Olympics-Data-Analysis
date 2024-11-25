@@ -14,7 +14,7 @@ export default function RegisterForm() {
     try {
       const response = await postRegister(userName, passwd, email);
       console.log(response);
-      window.location.href = "/login";
+      window.location.href = "./login";
     } catch (error) {
       alert(error);
     }
