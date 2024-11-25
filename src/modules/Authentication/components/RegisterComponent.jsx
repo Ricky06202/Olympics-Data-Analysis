@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { postRegister } from '@dataAnalysis/services/authAPI'
+import { postRegister } from 'modules/Authentication/services/authAPI'
 import { UserImage } from './icons/UserImage'
 import { MailImage } from './icons/MailImage'
 import { PasswordImage } from './icons/PasswordImage'
